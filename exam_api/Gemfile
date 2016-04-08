@@ -1,0 +1,18 @@
+source 'https://rubygems.org'
+
+gem 'rails', '4.1.8'
+gem 'pg'
+
+gem 'rspec'
+
+gem 'grape'
+gem 'grape-swagger-rails'
+gem 'grape-entity'
+
+group :development do
+  gem 'thin'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'quiet_assets'
+  gem 'spring'
+end
