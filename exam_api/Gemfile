@@ -6,6 +6,7 @@ gem 'pg'
 gem 'grape'
 gem 'grape-swagger-rails'
 gem 'grape-entity'
+gem 'hashie-forbidden_attributes'
 
 group :development do
   gem 'thin'
