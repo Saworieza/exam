@@ -1,4 +1,4 @@
-class Exam::V1::Students < Grape::API
+class ExamAPI::V1::Students < Grape::API
   resource :students do
     desc 'Return all students'
     get do

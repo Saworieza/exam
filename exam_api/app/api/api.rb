@@ -4,8 +4,9 @@ class API < Grape::API
 
   rescue_from :all, :backtrace => true
 
+  default_format :json
   format :json
 
-  mount Exam::V1::Base
+  mount ExamAPI::V1::Base
 
 end
