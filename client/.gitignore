@@ -1,0 +1,4 @@
+/node_modules
+/server/tmp
+/public/assets
+npm-debug.log

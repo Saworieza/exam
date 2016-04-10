@@ -1,0 +1,11 @@
+.login {
+  min-height: 100vh;
+}
+.login-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-top: 60px;
+}
