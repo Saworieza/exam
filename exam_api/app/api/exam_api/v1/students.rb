@@ -2,7 +2,7 @@ class ExamAPI::V1::Students < Grape::API
   resource :students do
     desc 'Return all students'
     get do
-      Student.all
+      present Student.all, with: ExamAPI::V1::Entities::StudentResponseEntity
     end
 
     desc 'Return student with the id provided'
@@ -13,7 +13,7 @@ class ExamAPI::V1::Students < Grape::API
     get ':id' do
       student = Student.find_by_id(params[:id])
       if student
-        student
+        present student, with: ExamAPI::V1::Entities::StudentResponseEntity
       else
         status 404
       end
@@ -33,7 +33,8 @@ class ExamAPI::V1::Students < Grape::API
     end
 
     post do
-      Student.create!(params[:student])
+      student = Student.create!(params[:student])
+      present student, with: ExamAPI::V1::Entities::StudentResponseEntity
     end
 
     desc 'Edit Student'
@@ -54,7 +55,7 @@ class ExamAPI::V1::Students < Grape::API
       student = Student.find_by_id(params[:id])
       if student
         student.update(params[:student])
-        student
+        present student, with: ExamAPI::V1::Entities::StudentResponseEntity
       else
         status 404
       end

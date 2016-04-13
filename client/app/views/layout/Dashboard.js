@@ -29,6 +29,8 @@ class Sidebar extends React.Component {
       <nav className='dashboard-sidebar'>
         <ul>
           <MenuItem className={this._menuClasses('dashboard-sidebar-home', '/')} to='/' title='Home' />
+          <MenuItem className={this._menuClasses('dashboard-sidebar-home', '/exams')} to='/exams' title='Exams' />
+          <MenuItem className={this._menuClasses('dashboard-sidebar-home', '/students')} to='/students' title='Students' />
         </ul>
       </nav>
     );

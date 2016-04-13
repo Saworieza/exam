@@ -1,0 +1,19 @@
+div.inner-header {
+  height: 60px;
+  background-color: #82C328;
+}
+
+div.inner-title {
+  height: 20px;
+  padding: 20px 25px;
+  line-height: 20px;
+  font-size: 18px;
+  font-family: Montserrat;
+  color: white;
+}
+
+div.inner-content {
+  background-color: white;
+  padding: 20px 5px;
+  min-height: 400px;
+}
