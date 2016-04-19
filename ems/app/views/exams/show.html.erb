@@ -1,0 +1,44 @@
+<div>
+  <div class='exams'>
+    <div class='inner-header'>
+      <div class='inner-title'>Exam - <%= @exam.id %></div>
+      <div class='inner-button'><%= link_to 'Back <', exams_path %></div>
+    </div>
+    <div class='inner-content'>
+      <p>
+        <strong>Type:</strong>
+        <%= @exam.exam_type %>
+      </p>
+
+      <p>
+        <strong>Date:</strong>
+        <%= @exam.date %>
+      </p>
+
+      <p>
+        <strong>Start time:</strong>
+        <%= @exam.start_time %>
+      </p>
+
+      <p>
+        <strong>End time:</strong>
+        <%= @exam.end_time %>
+      </p>
+
+      <p>
+        <strong>Semester:</strong>
+        <%= @exam.semester %>
+      </p>
+
+      <p>
+        <strong>Location:</strong>
+        <%= @exam.location %>
+      </p>
+
+      <p>
+        <strong>Registration deadline:</strong>
+        <%= @exam.registration_deadline %>
+      </p>
+    </div>
+  </div>
+</div>

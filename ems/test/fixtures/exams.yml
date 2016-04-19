@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  date: 2016-04-18
+  start_time: 2016-04-18 21:12:32
+  end_time: 2016-04-18 21:12:32
+  semester: MyString
+  location: MyString
+  registration_deadline: 2016-04-18
+
+two:
+  type: 
+  date: 2016-04-18
+  start_time: 2016-04-18 21:12:32
+  end_time: 2016-04-18 21:12:32
+  semester: MyString
+  location: MyString
+  registration_deadline: 2016-04-18

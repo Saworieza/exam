@@ -1,0 +1,63 @@
+<div class="row">
+<%= form_for(@exam, html: {class: 'col s12'}) do |f| %>
+  <% if @exam.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@exam.errors.count, "error") %> prohibited this exam from being saved:</h2>
+
+      <ul>
+      <% @exam.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="input-field col s8">
+    <%= f.text_field :exam_type, class: 'validate' %>
+    <%= f.label :type %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s8">
+    <%= f.date_field :date, class: 'datepicker' %>
+    <%= f.label :date %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s8">
+    <%= f.time_field :start_time, class: 'timepicker' %>
+    <%= f.label :start_time %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s8">
+    <%= f.time_field :end_time, class: 'timepicker' %>
+    <%= f.label :end_time %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s8">
+    <%= f.text_field :semester, class: 'validate' %>
+    <%= f.label :semester %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s8">
+    <%= f.text_field :location, class: 'validate' %>
+    <%= f.label :location %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s8">
+    <%= f.date_field :registration_deadline, class: 'datepicker' %>
+    <%= f.label :registration_deadline %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="actions">
+      <%= f.submit class: 'btn-large waves-effect waves-light' %>
+    </div>
+  </div>
+<% end %>
+</div>

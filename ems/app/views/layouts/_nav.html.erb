@@ -1,8 +1,12 @@
 <div class='dashboard-master'>
   <div class='dashboard-sidebar'>
     <ul>
-      <li><a href="#" class='dashboard-sidebar-home'>Home</a></li>
-      <li><a href="#" class='dashboard-sidebar-home'>Exams</a></li>
+      <li>
+        <%= link_to 'Home', root_url %>
+      </li>
+      <li>
+        <%= link_to 'Exams', exams_path %>
+      </li>
       <li>
         <%= link_to 'Students', students_path %>
       </li>
