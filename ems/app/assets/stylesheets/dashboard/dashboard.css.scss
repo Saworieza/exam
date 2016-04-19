@@ -1,0 +1,89 @@
+.dashboard, .dashboard .content {
+  min-height: 100vh;
+}
+
+div.dashboard-master {
+  width: 300px;
+  float: left;
+  box-sizing: border-box;
+}
+
+div.dashboard-detail {
+  margin-left: 300px;
+  box-sizing: border-box;
+}
+
+div.dashboard-sidebar {
+  padding-top: 130px;
+}
+
+div.dashboard-sidebar ul {
+  padding: 0;
+  margin: 0;
+}
+
+div.dashboard-sidebar ul li {
+  list-style-type: none;
+}
+
+div.dashboard-sidebar ul li a {
+  box-sizing: content-box;
+  height: 32px;
+  padding: 18px 0 0 96px;
+  margin: 2px 0;
+  display: block;
+  font-family: Montserrat;
+  font-size: 11px;
+  color: #FFFFFF;
+  letter-spacing: 3.14px;
+  line-height: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.dashboard-sidebar-home {
+  background: image-url("dashboard/icons/home.png") no-repeat 53px 13px;
+}
+
+div.dashboard-sidebar ul li a.active {
+  background-color: #1c2126;
+}
+
+div.inner-header {
+  height: 60px;
+  background-color: #82C328;
+}
+
+div.inner-title {
+  height: 20px;
+  padding: 20px 25px;
+  line-height: 20px;
+  font-size: 18px;
+  font-family: Montserrat;
+  color: white;
+  float: left;
+}
+
+div.inner-button {
+  height: 20px;
+  padding: 20px 25px;
+  line-height: 20px;
+  font-size: 18px;
+  font-family: Montserrat;
+  float: right;
+}
+
+div.inner-button a {
+  color: white;
+  text-decoration: none;
+}
+
+div.inner-button a:hover {
+  color: #232A30;
+}
+
+div.inner-content {
+  background-color: white;
+  padding: 20px 5px;
+  min-height: 400px;
+}

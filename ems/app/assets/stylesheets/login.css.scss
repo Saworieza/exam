@@ -1,0 +1,38 @@
+.login {
+  min-height: 100vh;
+}
+.login-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh-60px);
+  box-sizing: border-box;
+  padding-top: 60px;
+}
+
+.login-box {
+  max-width: 326px;
+  flex: 1;
+}
+
+.login-form {
+  width: 100%;
+}
+
+.login-form h1 {
+  font-size: 48px;
+  font-family: MontserratHairline;
+  color: #F5F5F5;
+  line-height: 57px;
+  font-weight: lighter !important;
+  text-align: center;
+  margin: 0 0 60px 0;
+}
+
+.login-form form div {
+  margin: 0 auto 20px;
+}
+
+.login-form button {
+  width: 326px;
+}

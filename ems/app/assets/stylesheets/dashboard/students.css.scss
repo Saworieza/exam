@@ -1,0 +1,34 @@
+div.students {
+  padding: 50px 30px;
+}
+
+table.student-table {
+  width: 100%;
+  font-family: Montserrat;
+  font-size: 14px;
+}
+
+table.student-table > thead > tr {
+  border-bottom: 2px solid #ddd;
+}
+
+table.student-table > tbody > tr {
+  border-bottom: 1px solid #ddd;
+}
+
+table.student-table > thead > tr > th {
+  padding: 15px;
+  color: #232A30;
+}
+
+table.student-table > tbody > tr > td {
+  padding: 15px;
+  color: #75757e;
+  font-family: MontserratHairline;
+  font-weight: bold;
+}
+
+
+table.student-table > tbody > tr:last-child {
+  border-bottom: 0 !important;
+}

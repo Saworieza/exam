@@ -1,0 +1,56 @@
+<div class="row">
+  <%= form_for(@student, html: {class: 'col s12'}) do |f| %>
+    <% if @student.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+        <ul>
+        <% @student.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="input-field col s8">
+        <%= f.text_field :username, class: 'validate' %>
+        <%= f.label :username %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s8">
+        <%= f.text_field :txstateid, class: 'validate' %>
+        <%= f.label :txstateid %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s8">
+        <%= f.text_field :last_name, class: 'validate' %>
+        <%= f.label :last_name %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s8">
+        <%= f.text_field :first_name, class: 'validate' %>
+        <%= f.label :first_name %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s8">
+        <%= f.text_field :major, class: 'validate' %>
+        <%= f.label :major %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s8">
+        <%= f.email_field :email, class: 'validate' %>
+        <%= f.label :email %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    </div>
+  <% end %>
+</div>
