@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :exams
+  resources :exams, :communications, :programmings, :cores, controller: 'exams'
 
   resources :students
 

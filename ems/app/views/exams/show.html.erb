@@ -7,8 +7,15 @@
     <div class='inner-content'>
       <p>
         <strong>Type:</strong>
-        <%= @exam.exam_type %>
+        <%= @exam.type %>
       </p>
+
+      <% if @exam.instance_of?(Core) %>
+        <p>
+          <strong>Class:</strong>
+          <%= @exam.clazz %>
+        </p>
+      <% end %>
 
       <p>
         <strong>Date:</strong>

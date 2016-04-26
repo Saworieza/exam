@@ -42,6 +42,16 @@ class ExamsController < ApplicationController
     end
 
     def exam_params
-      params.require(:exam).permit(:exam_type, :date, :start_time, :end_time, :semester, :location, :registration_deadline)
+      if params.include?('exam')
+        parameters = params.require(:exam).permit(:type, :clazz_id, :date, :start_time, :end_time, :semester, :location, :registration_deadline)
+      elsif params.include?('programming')
+        parameters = params.require(:programming).permit(:type, :clazz_id, :date, :start_time, :end_time, :semester, :location, :registration_deadline)
+      elsif params.include?('communication')
+        parameters = params.require(:communication).permit(:type, :clazz_id, :date, :start_time, :end_time, :semester, :location, :registration_deadline)
+      elsif params.include?('core')
+        parameters = params.require(:core).permit(:type, :clazz_id, :date, :start_time, :end_time, :semester, :location, :registration_deadline)
+      end
+
+      parameters
     end
 end

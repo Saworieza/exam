@@ -1,21 +1,23 @@
 <div class="row">
 <%= form_for(@exam, html: {class: 'col s12'}) do |f| %>
-  <% if @exam.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@exam.errors.count, "error") %> prohibited this exam from being saved:</h2>
-
-      <ul>
-      <% @exam.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="row">
     <div class="input-field col s8">
-    <%= f.text_field :exam_type, class: 'validate' %>
-    <%= f.label :type %>
+    <%= f.select(:type, {}, {}, {class: 'browser-default'}) do %>
+      <% Exam::EXAM_TYPE_LIST.each do |exam_type| %>
+        <%= content_tag(:option, exam_type, exam_type == @exam.type ? { value: exam_type, selected: 'selected' } : { value: exam_type }) %>
+      <% end %>
+    <% end %>
+    <!-- <%= f.label :type %> -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s8">
+    <%= f.select(:clazz_id, {}, {}, {class: 'browser-default'}) do %>
+      <% Clazz.joins(:group).order("groups.name ASC").each do |clazz| %>
+        <%= content_tag(:option, clazz, clazz.id == @exam.clazz_id ? { value: clazz.id, selected: 'selected' } : { value: clazz.id }) %>
+      <% end %>
+    <% end %>
+    <!-- <%= f.label :clazz %> -->
     </div>
   </div>
   <div class="row">
@@ -38,8 +40,12 @@
   </div>
   <div class="row">
     <div class="input-field col s8">
-    <%= f.text_field :semester, class: 'validate' %>
-    <%= f.label :semester %>
+    <%= f.select(:semester, {}, {}, {class: 'browser-default'}) do %>
+      <% %w(Fall Spring).each do |semester| %>
+        <%= content_tag(:option, semester, semester == @exam.semester ? { value: semester, selected: 'selected' } : { value: semester }) %>
+      <% end %>
+    <% end %>
+    <!-- <%= f.label :semester %> -->
     </div>
   </div>
   <div class="row">

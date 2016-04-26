@@ -11,19 +11,68 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419021232) do
+ActiveRecord::Schema.define(version: 20160420213318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "addresses", force: true do |t|
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.integer  "student_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "addresses", ["student_id"], name: "index_addresses_on_student_id", using: :btree
+
+  create_table "clazzs", force: true do |t|
+    t.string   "name"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "clazzs", ["group_id"], name: "index_clazzs_on_group_id", using: :btree
+
+  create_table "enrollments", force: true do |t|
+    t.integer  "exam_id"
+    t.integer  "student_id"
+    t.integer  "result_id"
+    t.boolean  "published",  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "enrollments", ["exam_id"], name: "index_enrollments_on_exam_id", using: :btree
+  add_index "enrollments", ["result_id"], name: "index_enrollments_on_result_id", using: :btree
+  add_index "enrollments", ["student_id"], name: "index_enrollments_on_student_id", using: :btree
+
   create_table "exams", force: true do |t|
-    t.string   "exam_type"
+    t.string   "type"
     t.date     "date"
     t.time     "start_time"
     t.time     "end_time"
     t.string   "semester"
     t.string   "location"
     t.date     "registration_deadline"
+    t.integer  "clazz_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "exams", ["clazz_id"], name: "index_exams_on_clazz_id", using: :btree
+
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "results", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,6 +84,7 @@ ActiveRecord::Schema.define(version: 20160419021232) do
     t.string   "first_name"
     t.string   "major"
     t.string   "email"
+    t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -9,6 +9,7 @@
         <thead>
           <tr>
             <th>Type</th>
+            <th>Class</th>
             <th>Date</th>
             <th>Start time</th>
             <th>End time</th>
@@ -21,7 +22,8 @@
         <tbody>
           <% @exams.each do |exam| %>
             <tr>
-              <td><%= exam.exam_type %></td>
+              <td><%= exam.type %></td>
+              <td><%= exam.instance_of?(Core) ? exam.clazz : '' %></td>
               <td><%= exam.date %></td>
               <td><%= exam.start_time %></td>
               <td><%= exam.end_time %></td>
