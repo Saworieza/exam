@@ -4,11 +4,11 @@ class StudentsController < SecuredController
   respond_to :html
 
   def index
-    query = search_params[:query]
-    if query.present?
+    @query = search_params[:query]
+    if @query.present?
       @students = Student.where('username LIKE :q or'\
         ' txstateid LIKE :q or last_name LIKE :q or first_name LIKE :q or'\
-        ' major LIKE :q or email LIKE :q', {q: "%#{query}%"})
+        ' major LIKE :q or email LIKE :q', {q: "%#{@query}%"})
     else
       @students = Student.all
     end

@@ -16,4 +16,8 @@ class Exam < ActiveRecord::Base
     exam_type == 'Core'
   end
 
+  def is_open_for_registration?
+    registration_deadline >= Date.today
+  end
+
 end

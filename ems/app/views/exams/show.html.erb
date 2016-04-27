@@ -33,11 +33,11 @@
           <% end %>
         </tbody>
       </table>
+      <div>
+        <strong>Total Students:</strong>
+        <%= @exam.enrollments.size %>
+      </div>
       <% if params[:result] %>
-        <div>
-          <strong>Total Results:</strong>
-          <%= @exam.enrollments.size %>
-        </div>
         <div>
           <strong>Passed:</strong>
           <%= total_results(@exam, Result::PASSED) %>
