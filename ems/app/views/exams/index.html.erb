@@ -30,13 +30,19 @@
               <td><%= exam.registration_deadline %></td>
               <td><%= link_to fa_icon('users'), exam, class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'View Registered' %></td>
               <td><%= link_to fa_icon('pencil-square-o'), edit_exam_path(exam), class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'Edit' %></td>
-              <td><%= link_to fa_icon('list-alt'), exam_path(exam, result: true), class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'View Results' %></td>
-              <td><%= link_to fa_icon('check-square-o'), enter_results_exam_path(exam), class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'Enter Results' %></td>
-              <td>
-                <% if !exam.published? %>
-                  <%= link_to fa_icon('share-square-o'), publish_exam_path(exam), method: 'post', class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'Publish Results' %></td>
-                <% end %>
-              </td>
+              <% if exam.is_done? and !exam.enrollments.empty? %>
+                <td><%= link_to fa_icon('list-alt'), exam_path(exam, result: true), class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'View Results' %></td>
+                <td><%= link_to fa_icon('check-square-o'), enter_results_exam_path(exam), class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'Enter Results' %></td>
+                <td>
+                  <% if !exam.published? %>
+                    <%= link_to fa_icon('share-square-o'), publish_exam_path(exam), method: 'post', class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'Publish Results' %></td>
+                  <% end %>
+                </td>
+              <% else %>
+                <td></td>
+                <td></td>
+                <td></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>

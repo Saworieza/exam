@@ -16,4 +16,8 @@ class Exam < ActiveRecord::Base
     exam_type == 'Core'
   end
 
+  def is_done?
+     Date.today >= self.date
+  end
+
 end
