@@ -4,12 +4,16 @@
       <li>
         <%= link_to 'Home', root_url %>
       </li>
-      <li>
-        <%= link_to 'Exam Options', exams_path %>
-      </li>
-      <li>
-        <%= link_to 'Students', students_path %>
-      </li>
+      <% if can? :default_crud, Exam %>
+        <li>
+          <%= link_to 'Exam Options', exams_path %>
+        </li>
+      <% end %>
+      <% if can? :default_crud, Student %>
+        <li>
+          <%= link_to 'Students', students_path %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>

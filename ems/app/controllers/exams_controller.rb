@@ -1,4 +1,6 @@
-class ExamsController < ApplicationController
+class ExamsController < SecuredController
+  load_and_authorize_resource
+
   before_action :set_exam, only: [:show, :edit, :update, :destroy, :publish, :enter_results, :save_results]
 
   respond_to :html

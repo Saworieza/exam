@@ -6,7 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create!(username: 'm_p330', password: '123456', password_confirmation: '123456')
+r1 = Role.create!(name: "Faculty", description: "Can manage exams and students records")
+r2 = Role.create!(name: "Student", description: "Can register to and withdraw from an exam as well view his exam result")
+
+User.create!(username: 'faculty', password: '123456', password_confirmation: '123456', role: r1)
+User.create!(username: 'm_p330', password: '123456', password_confirmation: '123456', role: r2)
 
 group_1 = Group.create!(name: 'Group 1')
 group_2 = Group.create!(name: 'Group 2')
