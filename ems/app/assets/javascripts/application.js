@@ -16,13 +16,15 @@
 //= require_tree .
 
 $(document).ready(function () {
-  $('.datepicker').pickadate({
-    selectMonths: true,
-    min: new Date()
-  });
+  // $('.datepicker').pickadate({
+  //   selectMonths: true,
+  //   min: new Date()
+  // });
+  //
+  // $('.timepicker').pickatime({
+  //   twelvehour: false,
+  //   donetext: 'Done'
+  // });
 
-  $('.timepicker').pickatime({
-    twelvehour: false,
-    donetext: 'Done'
-  });
+  $('select').material_select();
 });

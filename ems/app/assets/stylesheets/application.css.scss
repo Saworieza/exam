@@ -27,3 +27,13 @@ $input-success-color: #82C328 !default;
 .input-field input {
   color: color('grey', 'base');
 }
+
+p.error-text {
+  margin-top: -15px;
+  font-size: 12px;
+  color: red;
+}
+
+.hidden {
+  display: none;
+}

@@ -1,10 +1,10 @@
 class ExamsController < ApplicationController
-  before_action :set_exam, only: [:show, :edit, :update, :destroy]
+  before_action :set_exam, only: [:show, :edit, :update, :destroy, :publish, :enter_results, :save_results]
 
   respond_to :html
 
   def index
-    @exams = Exam.all
+    @exams = Exam.order(:date, :start_time)
     respond_with(@exams)
   end
 
@@ -22,18 +22,48 @@ class ExamsController < ApplicationController
 
   def create
     @exam = Exam.new(exam_params)
-    @exam.save
-    respond_with(@exam)
+    if @exam.save
+      redirect_to exams_path
+    else
+      respond_with(@exam)
+    end
   end
 
   def update
-    @exam.update(exam_params)
-    respond_with(@exam)
+    if @exam.update(exam_params)
+      redirect_to exams_path
+    else
+      respond_with(@exam)
+    end
   end
 
   def destroy
-    @exam.destroy
-    respond_with(@exam)
+    if @exam.destroy
+      redirect_to exams_path
+    else
+      respond_with(@exam)
+    end
+  end
+
+  def publish
+    @exam.published = true
+    @exam.save
+    redirect_to exams_path
+  end
+
+  def enter_results
+  end
+
+  def save_results
+    Enrollment.transaction do
+      result_params.each_pair do |key,value|
+        enrollment = @exam.enrollments.find_by_id(key)
+        if enrollment
+          enrollment.result = Result.find_by_name(value)
+        end
+        enrollment.save!
+      end
+    end
   end
 
   private
@@ -42,16 +72,15 @@ class ExamsController < ApplicationController
     end
 
     def exam_params
-      if params.include?('exam')
-        parameters = params.require(:exam).permit(:type, :clazz_id, :date, :start_time, :end_time, :semester, :location, :registration_deadline)
-      elsif params.include?('programming')
-        parameters = params.require(:programming).permit(:type, :clazz_id, :date, :start_time, :end_time, :semester, :location, :registration_deadline)
-      elsif params.include?('communication')
-        parameters = params.require(:communication).permit(:type, :clazz_id, :date, :start_time, :end_time, :semester, :location, :registration_deadline)
-      elsif params.include?('core')
-        parameters = params.require(:core).permit(:type, :clazz_id, :date, :start_time, :end_time, :semester, :location, :registration_deadline)
+      parameters = params.require(:exam).permit(:exam_type, :clazz_id, :date, :start_time, :end_time, :semester, :location, :registration_deadline)
+      if parameters[:exam_type] != 'Core'
+        parameters[:clazz_id] = nil
       end
 
       parameters
+    end
+
+    def result_params
+      params.require(:result)
     end
 end

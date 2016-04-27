@@ -1,51 +1,56 @@
 <div>
   <div class='exams'>
     <div class='inner-header'>
-      <div class='inner-title'>Exam - <%= @exam.id %></div>
+      <div class='inner-title'>
+        <% if params[:result] %>
+          View Results of Exam #<%= @exam.id %>
+        <% else %>
+          View Registered for Exam #<%= @exam.id %>
+        <% end %>
+      </div>
       <div class='inner-button'><%= link_to 'Back <', exams_path %></div>
     </div>
     <div class='inner-content'>
-      <p>
-        <strong>Type:</strong>
-        <%= @exam.type %>
-      </p>
-
-      <% if @exam.instance_of?(Core) %>
-        <p>
-          <strong>Class:</strong>
-          <%= @exam.clazz %>
-        </p>
+      <table class='student-table'>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>TXStateID</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @exam.enrollments.each do |enrollment| %>
+            <tr>
+              <td><%= enrollment.student.username %></td>
+              <td><%= enrollment.student.txstateid %></td>
+              <td><%= enrollment.student.first_name %></td>
+              <td><%= enrollment.student.last_name %></td>
+              <td><%= enrollment.result ? enrollment.result.name : nil %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% if params[:result] %>
+        <div>
+          <strong>Total Results:</strong>
+          <%= @exam.enrollments.size %>
+        </div>
+        <div>
+          <strong>Passed:</strong>
+          <%= total_results(@exam, Result::PASSED) %>
+        </div>
+        <div>
+          <strong>Failed: </strong>
+          <%= total_results(@exam, Result::FAILED) %>
+        </div>
+        <div>
+          <strong>Noshow: </strong>
+          <%= total_results(@exam, Result::NOSHOW) %>
+        </div>
       <% end %>
-
-      <p>
-        <strong>Date:</strong>
-        <%= @exam.date %>
-      </p>
-
-      <p>
-        <strong>Start time:</strong>
-        <%= @exam.start_time %>
-      </p>
-
-      <p>
-        <strong>End time:</strong>
-        <%= @exam.end_time %>
-      </p>
-
-      <p>
-        <strong>Semester:</strong>
-        <%= @exam.semester %>
-      </p>
-
-      <p>
-        <strong>Location:</strong>
-        <%= @exam.location %>
-      </p>
-
-      <p>
-        <strong>Registration deadline:</strong>
-        <%= @exam.registration_deadline %>
-      </p>
     </div>
   </div>
 </div>
