@@ -6,11 +6,19 @@ class Exam < ActiveRecord::Base
   has_many :enrollments
   has_many :students, :through => :enrollments
 
-  validates :exam_type, :date, :start_time, :end_time, :semester, :location, :registration_deadline, presence: true
+  validates :exam_type, :semester, :location, presence: true
   validates :semester, inclusion: { in: SEMESTER_LIST }
   validates :exam_type, inclusion: { in: EXAM_TYPE_LIST }
 
   validates :clazz, presence: true, if: :is_core?
+
+  validate do
+    self.errors[:date] << "must be a valid date yyyy-mm-dd" unless date.present?
+    self.errors[:registration_deadline] << "must be a valid date yyyy-mm-dd" unless registration_deadline.present?
+    self.errors[:start_time] << "must be a valid time HH:MM:SS" unless start_time.present?
+    self.errors[:end_time] << "must be a valid time HH:MM:SS" unless end_time.present?
+  end
+
 
   def is_core?
     exam_type == 'Core'

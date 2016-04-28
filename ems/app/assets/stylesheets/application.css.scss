@@ -41,3 +41,7 @@ p.error-text {
 p.flash-error, p.flash-notice {
   color: #F5F5F5;
 }
+
+.input-field > .invalid + label:after {
+  width: 300px;
+}
