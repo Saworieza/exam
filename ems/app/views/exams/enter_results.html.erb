@@ -31,7 +31,9 @@
         <% if !@exam.enrollments.empty? %>
           <div class="row">
             <div class="actions">
-              <%= f.submit class: 'btn-large waves-effect waves-light', value: 'Save Results' %>
+              <button class="btn-large waves-effect waves-light" type="submit" name="action">
+                Save Results
+              </button>
             </div>
           </div>
         <% end %>

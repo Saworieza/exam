@@ -11,6 +11,13 @@ Rails.application.routes.draw do
 
   get 'view_completed', to: 'home#view_completed'
 
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, controllers: { sessions: 'users/sessions' }, skip: [:registrations]
+
+  resource :users, only: [:edit] do
+    collection do
+      patch 'update_password'
+    end
+  end
+
   root 'home#index'
 end

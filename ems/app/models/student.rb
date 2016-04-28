@@ -9,9 +9,11 @@ class Student < ActiveRecord::Base
 
   validates :username, :txstateid, :email, uniqueness: true
 
+  attr_accessor :initial_password
+
   private
 
   def create_user
-    User.create!(username: self.username, password: self.txstateid, password_confirmation: self.txstateid, role: Role.student_role, student: self)
+    User.create!(username: self.username, password: self.initial_password, password_confirmation: self.initial_password, role: Role.student_role, student: self)
   end
 end

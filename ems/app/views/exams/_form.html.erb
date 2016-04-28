@@ -66,7 +66,13 @@
   </div>
   <div class="row">
     <div class="actions">
-      <%= f.submit class: 'btn-large waves-effect waves-light' %>
+      <button class="btn-large waves-effect waves-light" type="submit" name="action">
+        <% if @exam.new_record? %>
+          Save Exam
+        <% else %>
+          Update Exam
+        <% end %>
+      </button>
     </div>
   </div>
 <% end %>

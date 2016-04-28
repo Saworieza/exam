@@ -51,7 +51,7 @@ class StudentsController < SecuredController
     end
 
     def student_params
-      params.require(:student).permit(:username, :txstateid, :last_name, :first_name, :major, :email, :phone, :address, :city, :state, :zip, :query)
+      params.require(:student).permit(:username, :txstateid, :last_name, :first_name, :major, :email, :phone, :address, :city, :state, :zip, :initial_password)
     end
 
     def search_params

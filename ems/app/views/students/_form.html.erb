@@ -6,6 +6,14 @@
         <%= f.label :username %>
       </div>
     </div>
+    <% if @student.new_record? %>
+      <div class="row">
+        <div class="input-field col s8">
+          <%= f.password_field :initial_password, required: '', :'aria-required' => true %>
+          <%= f.label :initial_password %>
+        </div>
+      </div>
+    <% end %>
     <div class="row">
       <div class="input-field col s8">
         <%= f.text_field :txstateid, required: '', :'aria-required' => true %>
@@ -68,7 +76,13 @@
     </div>
     <div class="row">
       <div class="actions">
-        <%= f.submit class: 'btn-large waves-effect waves-light' %>
+        <button class="btn-large waves-effect waves-light" type="submit" name="action">
+          <% if @student.new_record? %>
+            Save Student
+          <% else %>
+            Update Student
+          <% end %>
+        </button>
       </div>
     </div>
   <% end %>
