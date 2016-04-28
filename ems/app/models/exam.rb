@@ -1,5 +1,5 @@
 class Exam < ActiveRecord::Base
-  EXAM_TYPE_LIST = %w(Communication Programming Core)
+  EXAM_TYPE_LIST = %w(Core Communication Programming)
   SEMESTER_LIST = %w(Spring Fall)
   belongs_to :clazz
 
@@ -18,6 +18,10 @@ class Exam < ActiveRecord::Base
 
   def is_open_for_registration?
     registration_deadline >= Date.today
+  end
+
+  def is_done?
+     Date.today >= self.date
   end
 
 end

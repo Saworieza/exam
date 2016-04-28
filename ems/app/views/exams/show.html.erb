@@ -33,24 +33,28 @@
           <% end %>
         </tbody>
       </table>
-      <div>
-        <strong>Total Students:</strong>
-        <%= @exam.enrollments.size %>
+      <div class='row results'>
+        <div class="col s4 offset-s8">
+          <div class='row'>
+            <div class='col s8 right-align result-title'>Total Students:</div>
+            <div class='col s4'><%= @exam.enrollments.size %></div>
+          </div>
+          <% if params[:result] %>
+            <div class='row'>
+              <div class='col s8 right-align result-title'>Passed:</div>
+              <div class='col s4'><%= total_results(@exam, Result::PASSED) %></div>
+            </div>
+            <div class='row'>
+              <div class='col s8 right-align result-title'>Failed:</div>
+              <div class='col s4'><%= total_results(@exam, Result::FAILED) %></div>
+            </div>
+            <div class='row'>
+              <div class='col s8 right-align result-title'>Noshow:</div>
+              <div class='col s4'><%= total_results(@exam, Result::NOSHOW) %></div>
+            </div>
+          <% end %>
+        </div>
       </div>
-      <% if params[:result] %>
-        <div>
-          <strong>Passed:</strong>
-          <%= total_results(@exam, Result::PASSED) %>
-        </div>
-        <div>
-          <strong>Failed: </strong>
-          <%= total_results(@exam, Result::FAILED) %>
-        </div>
-        <div>
-          <strong>Noshow: </strong>
-          <%= total_results(@exam, Result::NOSHOW) %>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>

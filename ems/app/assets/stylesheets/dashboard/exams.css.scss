@@ -32,3 +32,12 @@ table.exam-table > tbody > tr > td {
 table.exam-table > tbody > tr:last-child {
   border-bottom: 0 !important;
 }
+
+.result-title {
+  font-weight: bold;
+}
+
+.results {
+  margin-top: 30px;
+  font-size: 20px;
+}

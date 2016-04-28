@@ -1,34 +1,104 @@
 <div>
   <div class='students'>
     <div class='inner-header'>
-      <div class='inner-title'>Student - <%= @student.txstateid %></div>
+      <div class='inner-title'>View Student #<%= @student.txstateid %></div>
       <div class='inner-button'><%= link_to 'Back <', students_path %></div>
     </div>
     <div class='inner-content'>
-      <p>
-        <strong>Username:</strong>
-        <%= @student.username %>
-      </p>
-      <p>
-        <strong>Txstateid:</strong>
-        <%= @student.txstateid %>
-      </p>
-      <p>
-        <strong>Last name:</strong>
-        <%= @student.last_name %>
-      </p>
-      <p>
-        <strong>First name:</strong>
-        <%= @student.first_name %>
-      </p>
-      <p>
-        <strong>Major:</strong>
-        <%= @student.major %>
-      </p>
-      <p>
-        <strong>Email:</strong>
-        <%= @student.email %>
-      </p>
+      <div class='row student-list'>
+        <div class="col s6">
+          <div class='row'>
+            <div class='col s3 right-align student-list-title'>Username:</div>
+            <div class='col s9'><%= @student.username %></div>
+          </div>
+          <div class='row'>
+            <div class='col s3 right-align student-list-title'>TXStateID:</div>
+            <div class='col s9'><%= @student.txstateid %></div>
+          </div>
+          <div class='row'>
+            <div class='col s3 right-align student-list-title'>Last name:</div>
+            <div class='col s9'><%= @student.last_name %></div>
+          </div>
+          <div class='row'>
+            <div class='col s3 right-align student-list-title'>First name:</div>
+            <div class='col s9'><%= @student.first_name %></div>
+          </div>
+          <div class='row'>
+            <div class='col s3 right-align student-list-title'>Major:</div>
+            <div class='col s9'><%= @student.major %></div>
+          </div>
+          <div class='row'>
+            <div class='col s3 right-align student-list-title'>Email:</div>
+            <div class='col s9'><%= @student.email %></div>
+          </div>
+          <div class='row'>
+            <div class='col s3 right-align student-list-title'>Phone:</div>
+            <div class='col s9'><%= @student.phone %></div>
+          </div>
+          <div class='row'>
+            <div class='col s3 right-align student-list-title'>Address:</div>
+            <div class='col s9'><%= @student.address %></div>
+          </div>
+          <div class='row'>
+            <div class='col s3 right-align student-list-title'>City:</div>
+            <div class='col s9'><%= @student.city %></div>
+          </div>
+          <div class='row'>
+            <div class='col s3 right-align student-list-title'>State:</div>
+            <div class='col s9'><%= @student.state %></div>
+          </div>
+          <div class='row'>
+            <div class='col s3 right-align student-list-title'>Zip:</div>
+            <div class='col s9'><%= @student.zip %></div>
+          </div>
+        </div>
+        <div class="col s6">
+          <h4>Results:</h4>
+          <div class='row'>
+            <div class='col s4 right-align student-list-title'>Programming:</div>
+            <div class='col s8'><%= result_programming(@student) %></div>
+          </div>
+          <div class='row'>
+            <div class='col s4 right-align student-list-title'>Communication:</div>
+            <div class='col s8'><%= result_communication(@student) %></div>
+          </div>
+          <h5>Core Exams:</h5>
+          <% result_core(@student).each_pair do |exam, result| %>
+            <div class='row'>
+              <div class='col s4 right-align student-list-title'><%= exam %>:</div>
+              <div class='col s8'><%= result %></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <h3>Exam history:</h3>
+      <div class='row'>
+        <table class='exam-table'>
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Date</th>
+              <th>Semester</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @student.enrollments.each do |enrollment| %>
+              <tr>
+                <td>
+                  <%= enrollment.exam.exam_type %>
+                  <% if enrollment.exam.is_core? %>
+                    - <%= enrollment.exam.clazz.name %>
+                  <% end %>
+                </td>
+                <td><%= enrollment.exam.date %></td>
+                <td><%= enrollment.exam.semester %></td>
+                <td><%= (enrollment.exam.published? and enrollment.result.present?) ? enrollment.result.name : nil %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

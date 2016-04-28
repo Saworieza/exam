@@ -1,4 +1,6 @@
 class EnrollmentsController < SecuredController
+  load_and_authorize_resource
+  
   before_action :set_enrollment, only: [:destroy]
 
   respond_to :html

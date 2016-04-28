@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :rememberable, :trackable, :validatable
 
   belongs_to :role
+  belongs_to :student
 
   def email_required?
     false

@@ -13,11 +13,15 @@
   <div id="select-exam-clazz" class="row <%= @exam.is_core? ? nil : 'hidden' %>">
     <div class="input-field col s8">
     <%= f.select(:clazz_id) do %>
-      <% Clazz.joins(:group).order("groups.name ASC").each do |clazz| %>
-        <%= content_tag(:option, clazz, clazz.id == @exam.clazz_id ? { value: clazz.id, selected: 'selected' } : { value: clazz.id }) %>
+      <% Group.order(:name).each do |group| %>
+        <%= content_tag(:optgroup, label: group.name) do %>
+          <% group.clazzs.each do |clazz| %>
+            <%= content_tag(:option, clazz, clazz.id == @exam.clazz_id ? { value: clazz.id, selected: 'selected' } : { value: clazz.id }) %>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
-    <%= f.label :clazz %>
+    <%= f.label 'Class' %>
     </div>
   </div>
   <div class="row">

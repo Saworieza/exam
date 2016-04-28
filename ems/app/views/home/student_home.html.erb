@@ -22,7 +22,12 @@
         <tbody>
           <% @registered.each do |enrollment| %>
             <tr>
-              <td><%= enrollment.exam.exam_type %></td>
+              <td>
+                <%= enrollment.exam.exam_type %>
+                <% if enrollment.exam.is_core? %>
+                  - <%= enrollment.exam.clazz.name %>
+                <% end %>
+              </td>
               <td><%= enrollment.exam.date %></td>
               <td><%= enrollment.exam.start_time.strftime('%H:%M:%S') %></td>
               <td><%= enrollment.exam.end_time.strftime('%H:%M:%S') %></td>
@@ -63,7 +68,12 @@
         <tbody>
           <% @not_registered_and_open.each do |exam| %>
             <tr>
-              <td><%= exam.exam_type %></td>
+              <td>
+                <%= exam.exam_type %>
+                <% if exam.is_core? %>
+                  - <%= exam.clazz.name %>
+                <% end %>
+              </td>
               <td><%= exam.date %></td>
               <td><%= exam.start_time.strftime('%H:%M:%S') %></td>
               <td><%= exam.end_time.strftime('%H:%M:%S') %></td>

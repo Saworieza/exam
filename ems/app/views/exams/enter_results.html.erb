@@ -28,11 +28,13 @@
             <% end %>
           </tbody>
         </table>
-        <div class="row">
-          <div class="actions">
-            <%= f.submit class: 'btn-large waves-effect waves-light', value: 'Save Results' %>
+        <% if !@exam.enrollments.empty? %>
+          <div class="row">
+            <div class="actions">
+              <%= f.submit class: 'btn-large waves-effect waves-light', value: 'Save Results' %>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>

@@ -12,6 +12,6 @@ class Student < ActiveRecord::Base
   private
 
   def create_user
-    User.create!(username: self.username, password: self.txstateid, password_confirmation: self.txstateid, role: Role.student_role)
+    User.create!(username: self.username, password: self.txstateid, password_confirmation: self.txstateid, role: Role.student_role, student: self)
   end
 end

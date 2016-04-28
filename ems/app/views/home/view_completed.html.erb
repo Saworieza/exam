@@ -1,25 +1,9 @@
 <div>
   <div class='students'>
     <div class='inner-header'>
-      <div class='inner-title'>Students</div>
-      <div class='inner-button'><%= link_to 'New +', new_student_path %></div>
+      <div class='inner-title'>View Completed</div>
     </div>
     <div class='inner-content'>
-
-      <%= form_tag(students_path, method: :get, class: 'search-form') do %>
-        <div class='row'>
-          <div class='input-field col s6'>
-            <%= text_field_tag :query, @query %>
-            <%= label_tag :search %>
-          </div>
-          <div class='col s2'>
-            <button class="btn-large waves-effect waves-light" type="submit" name="action">
-              <%= fa_icon('search') %>
-            </button>
-          </div>
-        </div>
-      <% end %>
-
       <table class='student-table'>
         <thead>
           <tr>
@@ -30,11 +14,10 @@
             <th>Major</th>
             <th>Email</th>
             <th></th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
-          <% @students.each do |student| %>
+          <% @completed.each do |student| %>
             <tr>
               <td><%= student.username %></td>
               <td><%= student.txstateid %></td>
@@ -43,7 +26,6 @@
               <td><%= student.major %></td>
               <td><%= student.email %></td>
               <td><%= link_to fa_icon('eye'), student, class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'View Student' %></td>
-              <td><%= link_to fa_icon('pencil-square-o'), edit_student_path(student), class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'Edit Student' %></td>
             </tr>
           <% end %>
         </tbody>

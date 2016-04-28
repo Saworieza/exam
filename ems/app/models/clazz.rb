@@ -7,6 +7,6 @@ class Clazz < ActiveRecord::Base
   validates :group, presence: true
 
   def to_s
-    "#{name} - #{group.name}"
+    "#{name}"
   end
 end

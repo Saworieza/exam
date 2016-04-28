@@ -66,6 +66,7 @@ class ExamsController < SecuredController
         enrollment.save!
       end
     end
+    redirect_to exams_path
   end
 
   private

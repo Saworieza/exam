@@ -37,3 +37,7 @@ p.error-text {
 .hidden {
   display: none;
 }
+
+p.flash-error, p.flash-notice {
+  color: #F5F5F5;
+}

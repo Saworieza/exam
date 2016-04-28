@@ -9,8 +9,10 @@ class Ability
       can :default_crud, Exam
       can :results_crud, Exam
       can :default_crud, Student
+      can :view_completed, :home
     elsif user.student?
-
+      can :default_crud, Enrollment
     end
+    can :index, :home
   end
 end
