@@ -9,7 +9,7 @@
       <%= form_tag(students_path, method: :get, class: 'search-form') do %>
         <div class='row'>
           <div class='input-field col s6'>
-            <%= text_field_tag :query, @query %>
+            <%= text_field_tag 'query[text]', @query[:text] %>
             <%= label_tag :search %>
           </div>
           <div class='col s2'>
@@ -17,6 +17,22 @@
               <%= fa_icon('search') %>
             </button>
           </div>
+        </div>
+        <div class='row'>
+          <div class='input-field col s3'>
+            <%= select_tag('query[exam_type]', exam_type_list(@query[:exam_type]), include_blank: true, id: 'select-exam-type-search') %>
+            <%= label_tag :exam_type %>
+          </div>
+          <div class='col s6 <%= @query[:exam_type].blank? ? 'hidden' : nil %>' id='select-result'>
+            <%= result_search_radio_button('query[result]', Result::PASSED, @query[:result] || 'passed') %>
+            <%= result_search_radio_button('query[result]', Result::FAILED, @query[:result]) %>
+            <%= result_search_radio_button('query[result]', Result::NOSHOW, @query[:result]) %>
+          </div>
+          <!--<div id="select-exam-clazz" class="input-field col s3 <%= @query[:exam_type] == 'Core' ? nil : 'hidden' %>">
+            <%#= select_tag('query[clazz_id]', clazz_list(@query[:clazz_id])) %>
+            <%#= label_tag 'Class' %>
+          </div>-->
+
         </div>
       <% end %>
 

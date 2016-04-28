@@ -29,6 +29,37 @@ module StudentsHelper
     map
   end
 
+  def exam_type_list(selected)
+    options = Exam::EXAM_TYPE_LIST.collect do |exam_type|
+      content_tag(:option, exam_type, exam_type == selected ? { value: exam_type, selected: 'selected' } : { value: exam_type })
+    end
+    options.join('').html_safe
+  end
+
+  def clazz_list(selected)
+    options = Group.order(:name).collect do |group|
+      content_tag(:optgroup, label: group.name) do
+        group.clazzs.collect do |clazz|
+          concat content_tag(:option, clazz, clazz.id == selected ? { value: clazz.id, selected: 'selected' } : { value: clazz.id })
+        end
+      end
+    end
+    options.join('').html_safe
+  end
+
+  def result_search_radio_button(group, result, selected = nil)
+    if selected.present? and selected == result
+      input = content_tag(:input, nil, class: 'with-gap', name: group, type: 'radio', id: "#{group}-#{result}", value: result, checked: 'checked')
+    else
+      input = content_tag(:input, nil, class: 'with-gap', name: group, type: 'radio', id: "#{group}-#{result}", value: result)
+    end
+    label = content_tag(:label, for: "#{group}-#{result}") do
+      result
+    end
+
+    input + label
+  end
+
   private
 
     def exist_result?(enrollment, exam_type)

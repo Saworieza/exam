@@ -7,12 +7,24 @@ class StudentsController < SecuredController
 
   def index
     @query = search_params[:query]
-    if @query.present?
+    @query ||= {}
+
+    if @query[:text].present?
       @students = Student.where('username LIKE :q or'\
         ' txstateid LIKE :q or last_name LIKE :q or first_name LIKE :q or'\
-        ' major LIKE :q or email LIKE :q', {q: "%#{@query}%"})
+        ' major LIKE :q or email LIKE :q', {q: "%#{@query[:text]}%"})
     else
       @students = Student.all
+    end
+
+    if @query[:exam_type].present? and @query[:result].present?
+      @students = @students.collect { |s|
+        has_result = s.enrollments.collect { |e|
+          (e.exam.exam_type == @query[:exam_type] and e.exam.published? and e.result.present? and e.result.name == @query[:result]) ? e : nil
+        }.compact
+
+        !has_result.empty? ? s : nil
+      }.compact
     end
     respond_with(@students)
   end
@@ -55,6 +67,6 @@ class StudentsController < SecuredController
     end
 
     def search_params
-      params.permit(:query)
+      params.permit(:query => [:text, :exam_type, :result])
     end
 end

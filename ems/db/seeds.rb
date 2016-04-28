@@ -11,10 +11,10 @@ r2 = Role.create!(name: "Student", description: "Can register to and withdraw fr
 
 User.create!(username: 'faculty', password: '123456', password_confirmation: '123456', role: r1)
 
-group_1 = Group.create!(code: 'group1', name: 'Group 1')
-group_2 = Group.create!(code: 'group2', name: 'Group 2')
-group_3 = Group.create!(code: 'group3', name: 'Group 3')
-group_4 = Group.create!(code: 'group4', name: 'Group 4')
+group_1 = Group.create!(name: 'Group 1')
+group_2 = Group.create!(name: 'Group 2')
+group_3 = Group.create!(name: 'Group 3')
+group_4 = Group.create!(name: 'Group 4')
 
 Clazz.create!(group: group_1, name: 'CS 5329')
 Clazz.create!(group: group_2, name: 'CS 5346')
