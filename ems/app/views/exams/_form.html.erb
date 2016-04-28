@@ -1,56 +1,66 @@
 <div class="row">
 <%= form_for(@exam, html: {class: 'col s12'}) do |f| %>
-  <% if @exam.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@exam.errors.count, "error") %> prohibited this exam from being saved:</h2>
-
-      <ul>
-      <% @exam.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="row">
     <div class="input-field col s8">
-    <%= f.text_field :exam_type, class: 'validate' %>
-    <%= f.label :type %>
+    <%= f.select(:exam_type, {}, {}, {id: 'select-exam-type'}) do %>
+      <% Exam::EXAM_TYPE_LIST.each do |exam_type| %>
+        <%= content_tag(:option, exam_type, exam_type == @exam.exam_type ? { value: exam_type, selected: 'selected' } : { value: exam_type }) %>
+      <% end %>
+    <% end %>
+    <%= f.label :exam_type %>
+    </div>
+  </div>
+  <div id="select-exam-clazz" class="row <%= @exam.is_core? ? nil : 'hidden' %>">
+    <div class="input-field col s8">
+    <%= f.select(:clazz_id) do %>
+      <% Group.order(:name).each do |group| %>
+        <%= content_tag(:optgroup, label: group.name) do %>
+          <% group.clazzs.each do |clazz| %>
+            <%= content_tag(:option, clazz, clazz.id == @exam.clazz_id ? { value: clazz.id, selected: 'selected' } : { value: clazz.id }) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= f.label 'Class' %>
     </div>
   </div>
   <div class="row">
     <div class="input-field col s8">
-    <%= f.date_field :date, class: 'datepicker' %>
+    <%= f.text_field :date, required: '', :'aria-required' => true, placeholder: 'yyyy-mm-dd' %>
     <%= f.label :date %>
     </div>
   </div>
   <div class="row">
     <div class="input-field col s8">
-    <%= f.time_field :start_time, class: 'timepicker' %>
+    <%= f.text_field :start_time, required: '', :'aria-required' => true, placeholder: 'HH:MM:SS' %>
     <%= f.label :start_time %>
     </div>
   </div>
   <div class="row">
     <div class="input-field col s8">
-    <%= f.time_field :end_time, class: 'timepicker' %>
-    <%= f.label :end_time %>
+    <%= f.text_field :end_time, required: '', :'aria-required' => true, placeholder: 'HH:MM:SS' %>
+    <%= f.label :end_time, class: 'error-label' %>
     </div>
   </div>
   <div class="row">
     <div class="input-field col s8">
-    <%= f.text_field :semester, class: 'validate' %>
+    <%= f.select(:semester) do %>
+      <% Exam::SEMESTER_LIST.each do |semester| %>
+        <%= content_tag(:option, semester, semester == @exam.semester ? { value: semester, selected: 'selected' } : { value: semester }) %>
+      <% end %>
+    <% end %>
     <%= f.label :semester %>
     </div>
   </div>
   <div class="row">
     <div class="input-field col s8">
-    <%= f.text_field :location, class: 'validate' %>
+    <%= f.text_field :location, required: '', :'aria-required' => true %>
     <%= f.label :location %>
     </div>
   </div>
   <div class="row">
     <div class="input-field col s8">
-    <%= f.date_field :registration_deadline, class: 'datepicker' %>
+    <%= f.text_field :registration_deadline, required: '', :'aria-required' => true, placeholder: 'yyyy-mm-dd' %>
     <%= f.label :registration_deadline %>
     </div>
   </div>

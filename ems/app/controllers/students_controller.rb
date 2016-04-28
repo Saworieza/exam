@@ -1,10 +1,19 @@
 class StudentsController < SecuredController
+  load_and_authorize_resource
+
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
 
   def index
-    @students = Student.all
+    @query = search_params[:query]
+    if @query.present?
+      @students = Student.where('username LIKE :q or'\
+        ' txstateid LIKE :q or last_name LIKE :q or first_name LIKE :q or'\
+        ' major LIKE :q or email LIKE :q', {q: "%#{@query}%"})
+    else
+      @students = Student.all
+    end
     respond_with(@students)
   end
 
@@ -42,6 +51,10 @@ class StudentsController < SecuredController
     end
 
     def student_params
-      params.require(:student).permit(:username, :txstateid, :last_name, :first_name, :major, :email)
+      params.require(:student).permit(:username, :txstateid, :last_name, :first_name, :major, :email, :phone, :address, :city, :state, :zip, :query)
+    end
+
+    def search_params
+      params.permit(:query)
     end
 end

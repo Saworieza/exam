@@ -21,9 +21,14 @@ module Ems
     # config.i18n.default_locale = :de
 
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+      puts instance.error_message
       if html_tag =~ /<(input|label|textarea|select)/
         html_field = Nokogiri::HTML::DocumentFragment.parse(html_tag)
-        html_field.children.add_class 'invalid'
+        input = html_field.css('input')
+        puts input
+        label = html_field.css('label')
+        input.add_class 'invalid'
+        label.attr 'data-error', instance.error_message.first
         html_field.to_s.html_safe
       else
         html_tag

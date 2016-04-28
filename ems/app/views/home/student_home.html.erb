@@ -1,0 +1,92 @@
+<div>
+  <div class='exams'>
+    <div class='inner-header'>
+      <div class='inner-title'>Home</div>
+    </div>
+    <div class='inner-content'>
+      <h4>Registered</h4>
+      <table class='exam-table'>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Start time</th>
+            <th>End time</th>
+            <th>Semester</th>
+            <th>Location</th>
+            <th>Registration deadline</th>
+            <th>Result</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @registered.each do |enrollment| %>
+            <tr>
+              <td>
+                <%= enrollment.exam.exam_type %>
+                <% if enrollment.exam.is_core? %>
+                  - <%= enrollment.exam.clazz.name %>
+                <% end %>
+              </td>
+              <td><%= enrollment.exam.date %></td>
+              <td><%= enrollment.exam.start_time.strftime('%H:%M:%S') %></td>
+              <td><%= enrollment.exam.end_time.strftime('%H:%M:%S') %></td>
+              <td><%= enrollment.exam.semester %></td>
+              <td><%= enrollment.exam.location %></td>
+              <td><%= enrollment.exam.registration_deadline %></td>
+              <td>
+                <% if enrollment.exam.published? %>
+                  <% if enrollment.result.present? %>
+                    <%= enrollment.result.name %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td>
+                <% if enrollment.exam.is_open_for_registration? %>
+                  <%= link_to fa_icon('calendar-times-o'), enrollment, method: 'delete', class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'Withdraw' %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <h4>Open for registration</h4>
+      <table class='exam-table'>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Start time</th>
+            <th>End time</th>
+            <th>Semester</th>
+            <th>Location</th>
+            <th>Registration deadline</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @not_registered_and_open.each do |exam| %>
+            <tr>
+              <td>
+                <%= exam.exam_type %>
+                <% if exam.is_core? %>
+                  - <%= exam.clazz.name %>
+                <% end %>
+              </td>
+              <td><%= exam.date %></td>
+              <td><%= exam.start_time.strftime('%H:%M:%S') %></td>
+              <td><%= exam.end_time.strftime('%H:%M:%S') %></td>
+              <td><%= exam.semester %></td>
+              <td><%= exam.location %></td>
+              <td><%= exam.registration_deadline %></td>
+              <td>
+                <%= link_to fa_icon('calendar-check-o'), enrollments_path(enrollment: {exam_id: exam.id}), method: 'post', class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'Register' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

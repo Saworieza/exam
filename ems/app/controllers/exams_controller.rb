@@ -1,10 +1,12 @@
-class ExamsController < ApplicationController
-  before_action :set_exam, only: [:show, :edit, :update, :destroy]
+class ExamsController < SecuredController
+  load_and_authorize_resource
+
+  before_action :set_exam, only: [:show, :edit, :update, :destroy, :publish, :enter_results, :save_results]
 
   respond_to :html
 
   def index
-    @exams = Exam.all
+    @exams = Exam.order(:date, :start_time)
     respond_with(@exams)
   end
 
@@ -22,18 +24,49 @@ class ExamsController < ApplicationController
 
   def create
     @exam = Exam.new(exam_params)
-    @exam.save
-    respond_with(@exam)
+    if @exam.save
+      redirect_to exams_path
+    else
+      respond_with(@exam)
+    end
   end
 
   def update
-    @exam.update(exam_params)
-    respond_with(@exam)
+    if @exam.update(exam_params)
+      redirect_to exams_path
+    else
+      respond_with(@exam)
+    end
   end
 
   def destroy
-    @exam.destroy
-    respond_with(@exam)
+    if @exam.destroy
+      redirect_to exams_path
+    else
+      respond_with(@exam)
+    end
+  end
+
+  def publish
+    @exam.published = true
+    @exam.save
+    redirect_to exams_path
+  end
+
+  def enter_results
+  end
+
+  def save_results
+    Enrollment.transaction do
+      result_params.each_pair do |key,value|
+        enrollment = @exam.enrollments.find_by_id(key)
+        if enrollment
+          enrollment.result = Result.find_by_name(value)
+        end
+        enrollment.save!
+      end
+    end
+    redirect_to exams_path
   end
 
   private
@@ -42,6 +75,15 @@ class ExamsController < ApplicationController
     end
 
     def exam_params
-      params.require(:exam).permit(:exam_type, :date, :start_time, :end_time, :semester, :location, :registration_deadline)
+      parameters = params.require(:exam).permit(:exam_type, :clazz_id, :date, :start_time, :end_time, :semester, :location, :registration_deadline)
+      if parameters[:exam_type] != 'Core'
+        parameters[:clazz_id] = nil
+      end
+
+      parameters
+    end
+
+    def result_params
+      params.require(:result)
     end
 end

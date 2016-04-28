@@ -1,7 +1,7 @@
 <div>
   <div class='exams'>
     <div class='inner-header'>
-      <div class='inner-title'>Exams</div>
+      <div class='inner-title'>Exam Options</div>
       <div class='inner-button'><%= link_to 'New +', new_exam_path %></div>
     </div>
     <div class='inner-content'>
@@ -15,21 +15,39 @@
             <th>Semester</th>
             <th>Location</th>
             <th>Registration deadline</th>
-            <th colspan="2"></th>
+            <th colspan="5"></th>
           </tr>
         </thead>
         <tbody>
           <% @exams.each do |exam| %>
             <tr>
-              <td><%= exam.exam_type %></td>
+              <td>
+                <%= exam.exam_type %>
+                <% if exam.is_core? %>
+                  - <%= exam.clazz.name %>
+                <% end %>
+              </td>
               <td><%= exam.date %></td>
-              <td><%= exam.start_time %></td>
-              <td><%= exam.end_time %></td>
+              <td><%= exam.start_time.strftime('%H:%M:%S') %></td>
+              <td><%= exam.end_time.strftime('%H:%M:%S') %></td>
               <td><%= exam.semester %></td>
               <td><%= exam.location %></td>
               <td><%= exam.registration_deadline %></td>
-              <td><%= link_to fa_icon('eye'), exam, class: 'link' %></td>
-              <td><%= link_to fa_icon('pencil-square-o'), edit_exam_path(exam), class: 'link' %></td>
+              <td><%= link_to fa_icon('users'), exam, class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'View Registered' %></td>
+              <td><%= link_to fa_icon('pencil-square-o'), edit_exam_path(exam), class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'Edit' %></td>
+              <% if exam.is_done? and !exam.enrollments.empty? %>
+                <td><%= link_to fa_icon('list-alt'), exam_path(exam, result: true), class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'View Results' %></td>
+                <td><%= link_to fa_icon('check-square-o'), enter_results_exam_path(exam), class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'Enter Results' %></td>
+                <td>
+                  <% if !exam.published? %>
+                    <%= link_to fa_icon('share-square-o'), publish_exam_path(exam), method: 'post', class: 'link tooltipped', :'data-position' => 'top', :'data-tooltip' => 'Publish Results' %></td>
+                  <% end %>
+                </td>
+              <% else %>
+                <td></td>
+                <td></td>
+                <td></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>

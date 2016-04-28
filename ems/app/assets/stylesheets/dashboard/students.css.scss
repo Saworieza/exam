@@ -32,3 +32,19 @@ table.student-table > tbody > tr > td {
 table.student-table > tbody > tr:last-child {
   border-bottom: 0 !important;
 }
+
+.search-form .row {
+  height: 75px;
+}
+
+.student-list {
+  font-size: 16px;
+}
+
+.student-list > div > .row {
+  margin-bottom: 5px;
+}
+
+.student-list-title {
+  font-weight: bold;
+}

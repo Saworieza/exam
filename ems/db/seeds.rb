@@ -6,4 +6,25 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create!(username: 'm_p330', password: '123456', password_confirmation: '123456')
+r1 = Role.create!(name: "Faculty", description: "Can manage exams and students records")
+r2 = Role.create!(name: "Student", description: "Can register to and withdraw from an exam as well view his exam result")
+
+User.create!(username: 'faculty', password: '123456', password_confirmation: '123456', role: r1)
+
+group_1 = Group.create!(code: 'group1', name: 'Group 1')
+group_2 = Group.create!(code: 'group2', name: 'Group 2')
+group_3 = Group.create!(code: 'group3', name: 'Group 3')
+group_4 = Group.create!(code: 'group4', name: 'Group 4')
+
+Clazz.create!(group: group_1, name: 'CS 5329')
+Clazz.create!(group: group_2, name: 'CS 5346')
+Clazz.create!(group: group_2, name: 'CS 5391')
+Clazz.create!(group: group_3, name: 'CS 5332')
+Clazz.create!(group: group_3, name: 'CS 5310')
+Clazz.create!(group: group_4, name: 'CS 5338')
+Clazz.create!(group: group_4, name: 'CS 5318')
+Clazz.create!(group: group_4, name: 'CS 5351')
+
+Result.create!(name: 'noshow')
+Result.create!(name: 'passed')
+Result.create!(name: 'failed')

@@ -1,50 +1,69 @@
 <div class="row">
   <%= form_for(@student, html: {class: 'col s12'}) do |f| %>
-    <% if @student.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
-
-        <ul>
-        <% @student.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
     <div class="row">
       <div class="input-field col s8">
-        <%= f.text_field :username, class: 'validate' %>
+        <%= f.text_field :username, required: '', :'aria-required' => true %>
         <%= f.label :username %>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s8">
-        <%= f.text_field :txstateid, class: 'validate' %>
+        <%= f.text_field :txstateid, required: '', :'aria-required' => true %>
         <%= f.label :txstateid %>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s8">
-        <%= f.text_field :last_name, class: 'validate' %>
+        <%= f.text_field :last_name, required: '', :'aria-required' => true %>
         <%= f.label :last_name %>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s8">
-        <%= f.text_field :first_name, class: 'validate' %>
+        <%= f.text_field :first_name, required: '', :'aria-required' => true %>
         <%= f.label :first_name %>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s8">
-        <%= f.text_field :major, class: 'validate' %>
+        <%= f.text_field :major, required: '', :'aria-required' => true %>
         <%= f.label :major %>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s8">
-        <%= f.email_field :email, class: 'validate' %>
+        <%= f.email_field :email, required: '', :'aria-required' => true %>
         <%= f.label :email %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s8">
+        <%= f.text_field :phone, required: '', :'aria-required' => true %>
+        <%= f.label :phone %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s8">
+        <%= f.text_field :address, required: '', :'aria-required' => true %>
+        <%= f.label :address %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s8">
+        <%= f.text_field :city, required: '', :'aria-required' => true %>
+        <%= f.label :city %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s8">
+        <%= f.text_field :state, required: '', :'aria-required' => true %>
+        <%= f.label :state %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s8">
+        <%= f.text_field :zip, required: '', :'aria-required' => true %>
+        <%= f.label :zip %>
       </div>
     </div>
     <div class="row">
